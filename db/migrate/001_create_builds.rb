@@ -5,11 +5,12 @@ class CreateBuilds < ActiveRecord::Migration
       t.string :release
       t.datetime :started_at
       t.datetime :finished_at
-      t.string :target
+      t.integer :target
       t.string :builder
       t.integer :project_id
       t.string :commit
-      t.string :logs
+      t.text :logs
+      t.timestamps
     end
   end
 end

@@ -20,8 +20,11 @@ class BuildsController < ApplicationController
       :release     => params[:release],
       :commit     => params[:commit],
       :logs     => params[:logs],
+      :target   => params[:target],
+      :builder  => params[:builder],
+      :started_at => params[:started_at],
+      :finished_at => params[:finished_at]
     )
-#    @build.safe_attributes = params[:build]
 
     if @build.save
       render_api_ok

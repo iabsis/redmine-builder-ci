@@ -1,0 +1,35 @@
+<h2>Builds</h2>
+<% html_title "Builds" %>
+
+<div class="tab-content">
+    <table id="root" class="list entries">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Release</th>
+                <th>Target</th>
+                <th>Builder</th>
+                <th>Commit</th>
+                <th>Started on</th>
+                <th>Finished on</th>
+                <th>View logs</th>
+            </tr>
+        </thead>
+        <% @builds.each do |build| %>
+            <tr>
+                <td><%= build.status %></td>
+                <td><%= build.release %></td>
+                <td><%= build.target %></td>
+                <td><%= build.builder %></td>
+                <td>
+                    <%= link_to build.commit, { :controller => 'repositories', :action => 'revision', :rev => build.commit, :id => @project.id }, :method => :get %>            
+                </td>
+                <td><%= build.started_at %></td>
+                <td><%= build.finished_at %></td>
+                <td>
+                    <%= link_to 'View', { :action => 'view', :id => build[:id] }, :method => :get %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>

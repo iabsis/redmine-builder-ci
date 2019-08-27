@@ -1,0 +1,5 @@
+# English strings go here for Rails i18n
+en:
+  permission_index_builds: List builds
+  permission_view_builds: View builds
+  # my_label: "My label"

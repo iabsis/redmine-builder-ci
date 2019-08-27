@@ -1,0 +1,11 @@
+<h2>Build logs commit <%= @build.commit %></h2>
+
+<code>
+<% if @build.logs.nil? %>
+    Not logs for this build
+<% else %>
+    <%= @build.logs %>
+<% end %>
+</code>
+
+

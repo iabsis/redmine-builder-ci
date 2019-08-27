@@ -1,0 +1,3 @@
+= Redmine Builder CI
+
+This module permit to display Build result trigger by an external script.

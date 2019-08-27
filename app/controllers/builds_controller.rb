@@ -29,7 +29,7 @@ class BuildsController < ApplicationController
     if @build.save
       render_api_ok
     else
-      render_api_errors "Bla"
+      render_api_errors "Invalid data"
     end
   end
 

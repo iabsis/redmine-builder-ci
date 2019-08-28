@@ -17,12 +17,19 @@
         </thead>
         <% @builds.each do |build| %>
             <tr>
-                <td><%= build.status %></td>
+                <td>
+                    <% case build.status when "Success" %>
+                        <i class="icon icon-checked"></i>
+                    <% when "Failed" %>
+                        <i class="icon icon-error"></i>
+                    <% end %>
+                    <%= build.status %></td>
+                </td>
                 <td><%= build.release %></td>
                 <td><%= build.target %></td>
                 <td><%= build.builder %></td>
                 <td>
-                    <%= link_to build.commit, { :controller => 'repositories', :action => 'revision', :rev => build.commit, :id => @project.id }, :method => :get %>            
+                    <%= link_to format_revision(build.commit), { :controller => 'repositories', :action => 'revision', :rev => build.commit, :id => @project.id }, :method => :get %>            
                 </td>
                 <td><%= build.started_at %></td>
                 <td><%= build.finished_at %></td>

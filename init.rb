@@ -5,8 +5,6 @@ Redmine::Plugin.register :continous_integration do
   version '0.0.1'
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
-  permission :index_builds, :builds => :index
-  permission :view_builds, :builds => :view
   menu :project_menu, :builds, { :controller => 'builds', :action => 'index' }, :caption => 'Builds', :after => :repository, :param => :project_id
   project_module :builds do
     permission :index_builds, :builds => :index

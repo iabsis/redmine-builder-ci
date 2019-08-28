@@ -14,6 +14,10 @@ class BuildsController < ApplicationController
   end
 
   def new
+
+    ## Permit to send params with project identifier instead of its id.
+    params[:project_id] ||= Project.find_by(identifier: params[:project]).id
+
     @build = Builds.create(
       :project_id => params[:project_id],
       :status     => params[:status],

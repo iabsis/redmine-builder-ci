@@ -1,8 +1,11 @@
 class BuildsController < ApplicationController
   unloadable
+
   before_filter :find_project, :authorize, :only => [:view, :index]
-#  before_filter :authorize, :only => :new
+  before_filter :find_project, :authorize, :only => :new
+
   accept_api_auth :new
+
 
   def index
     @project = Project.find(params[:project_id])
@@ -17,7 +20,6 @@ class BuildsController < ApplicationController
   def new
 
     ## Permit to send params with project identifier instead of its id.
-    params[:project_id] ||= Project.find_by(identifier: params[:project]).id
 
     build = Builds.create(
       :project_id => params[:project_id],
@@ -42,6 +44,7 @@ class BuildsController < ApplicationController
 
   def find_project
     # @project variable must be set before calling the authorize filter
+    params[:project_id] ||= Project.find_by(identifier: params[:project]).id
     @project = Project.find(params[:project_id])
   end
 

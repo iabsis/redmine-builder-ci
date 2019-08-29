@@ -1,7 +1,8 @@
 class BuildsController < ApplicationController
-  default_search_scope :builds
-  before_filter :find_project, :authorize, :only => :index
-
+  unloadable
+  before_filter :find_project, :authorize, :only => [:view, :index]
+#  before_filter :authorize, :only => :new
+  accept_api_auth :new
 
   def index
     @project = Project.find(params[:project_id])
@@ -18,7 +19,7 @@ class BuildsController < ApplicationController
     ## Permit to send params with project identifier instead of its id.
     params[:project_id] ||= Project.find_by(identifier: params[:project]).id
 
-    @build = Builds.create(
+    build = Builds.create(
       :project_id => params[:project_id],
       :status     => params[:status],
       :release     => params[:release],
@@ -30,7 +31,7 @@ class BuildsController < ApplicationController
       :finished_at => params[:finished_at]
     )
 
-    if @build.save
+    if build.save
       render_api_ok
     else
       render_api_errors "Invalid data"

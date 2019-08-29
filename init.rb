@@ -7,7 +7,7 @@ Redmine::Plugin.register :continous_integration do
   author_url 'http://example.com/about'
   menu :project_menu, :builds, { :controller => 'builds', :action => 'index' }, :caption => 'Builds', :after => :repository, :param => :project_id
   project_module :builds do
-    permission :index_builds, :builds => :index
-    permission :view_builds, :builds => :view
+    permission :view_builds, :builds => [:view, :index]
+    permission :new_builds, :builds => :new
   end
 end

@@ -6,7 +6,6 @@ class BuildsController < ApplicationController
 
   accept_api_auth :new
 
-
   def index
     @project = Project.find(params[:project_id])
     @builds = Builds.where(project_id: @project.id)

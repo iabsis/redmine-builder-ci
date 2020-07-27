@@ -1,11 +1,22 @@
 <h2>Build logs commit <%= @build.commit %></h2>
 
-<code>
-<% if @build.logs.nil? %>
-    Not logs for this build
-<% else %>
-    <%= @build.logs %>
+<% filename = "logs" %>
+
+<div class="autoscroll">
+<table class="filecontent syntaxhl">
+<tbody>
+<% line_num = 1 %>
+<% syntax_highlight_lines(filename, Redmine::CodesetUtil.to_utf8_by_setting(@build.logs)).each do |line| %>
+  <tr id="L<%= line_num %>">
+    <th class="line-num">
+      <a href="#L<%= line_num %>"><%= line_num %></a>
+    </th>
+    <td class="line-code">
+      <pre><%= line.html_safe %></pre>
+    </td>
+  </tr>
+  <% line_num += 1 %>
 <% end %>
-</code>
-
-
+</tbody>
+</table>
+</div>

@@ -8,7 +8,7 @@ class BuildsController < ApplicationController
 
   def index
     @project = Project.find(params[:project_id])
-    @builds = Builds.where(project_id: @project.id)
+    @builds = Builds.where(project_id: @project.id).reorder("id DESC").limit(25)
   end
 
   def view

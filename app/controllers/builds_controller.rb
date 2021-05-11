@@ -62,6 +62,9 @@ class BuildsController < ApplicationController
     params.require(:build).permit(:project_id, :status, :release)
   end
 
+  def all
+    @builds = Builds.find_each(batch_size: 5000)
+  end
 
   private  
 

@@ -1,10 +1,10 @@
 class BuildsController < ApplicationController
   unloadable
 
-  before_filter :find_project, :authorize, :only => [:view, :index]
-  before_filter :find_project, :authorize, :only => :new
+  before_action :find_project, :authorize, :only => [:view, :index]
+  before_action :find_project, :authorize, :only => :new
 
-  accept_api_auth :new
+  accept_api_auth :new, :update
 
   def index
     @project = Project.find(params[:project_id])
@@ -14,6 +14,7 @@ class BuildsController < ApplicationController
   def view
     @project = Project.find(params[:project_id])
     @build = Builds.find(params[:id])
+
   end
 
   def new
@@ -33,13 +34,36 @@ class BuildsController < ApplicationController
     )
 
     if build.save
-      render_api_ok
+      render json: build.id
     else
       render_api_errors "Invalid data"
     end
   end
 
-  private
+  def update
+
+    @build = Builds.find(params[:id])
+    @build.update(
+      :status     => params[:status],
+      :release     => params[:release],
+      :commit     => params[:commit],
+      :logs     => params[:logs],
+      :target   => params[:target],
+      :builder  => params[:builder],
+      :started_at => params[:started_at],
+      :finished_at => params[:finished_at]
+    )
+
+    render json: @build.id
+
+  end
+
+  def build_params
+    params.require(:build).permit(:project_id, :status, :release)
+  end
+
+
+  private  
 
   def find_project
     # @project variable must be set before calling the authorize filter

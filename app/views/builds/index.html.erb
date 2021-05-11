@@ -7,7 +7,6 @@
             <tr>
                 <th>Status</th>
                 <th>Release</th>
-                <th>Target</th>
                 <th>Builder</th>
                 <th>Commit</th>
                 <th>Started on</th>
@@ -22,15 +21,14 @@
                         <i class="icon icon-checked"></i>
                     <% when "Failed" %>
                         <i class="icon icon-error"></i>
+                    <% when "Building" %>
+                        <i class="fa fa-spinner fa-spin"></i>
                     <% end %>
                     <%= build.status %></td>
                 </td>
                 <td><%= build.release %></td>
-                <td><%= build.target %></td>
                 <td><%= build.builder %></td>
-                <td>
-                    <%= link_to format_revision(build.commit), { :controller => 'repositories', :action => 'revision', :rev => build.commit, :id => @project.id }, :method => :get %>            
-                </td>
+                <td><%= build.commit %></td>
                 <td><%= build.started_at %></td>
                 <td><%= build.finished_at %></td>
                 <td>

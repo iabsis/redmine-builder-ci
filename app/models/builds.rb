@@ -2,8 +2,8 @@ class Builds < ActiveRecord::Base
 
   belongs_to :project
   validates :status, presence: true
-  validates :status, inclusion: { in: %w(Success Failed Building),
-    message: "%{value} must be Success, Building or Failed" }
+  validates :status, inclusion: { in: %w(Success Failed Running New Duplicate),
+    message: "%{value} must be Success, Running, New, Duplicate or Failed" }
 
   validates :project_id_exists, presence: true
 

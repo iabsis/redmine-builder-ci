@@ -8,7 +8,8 @@ class BuildsController < ApplicationController
 
   def index
     @project = Project.find(params[:project_id])
-    @builds = Builds.where(project_id: @project.id).reorder("id DESC").limit(25)
+    @builds = Builds.where(project_id: @project.id, status: "Success").or(Builds.where(project_id: @project.id, status: "Failed")).reorder("id DESC").limit(25)
+    @last_build = Builds.last(3).reverse
   end
 
   def view

@@ -1,5 +1,46 @@
-<h2>Builds</h2>
 <% html_title "Builds" %>
+
+<h2>Last builds status</h2>
+
+<div class="tab-content">
+    <table id="root" class="list entries">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Release</th>
+                <th>Builder</th>
+                <th>Commit</th>
+                <th>Started on</th>
+                <th>Finished on</th>
+                <th>View logs</th>
+            </tr>
+        </thead>
+        <% @last_build.each do |build| %>
+            <tr>
+                <td>
+                    <% case build.status when "Success" %>
+                        <i class="icon icon-checked"></i>
+                    <% when "Failed" %>
+                        <i class="icon icon-error"></i>
+                    <% when "Running" %>
+                        <i class="fa fa-spinner fa-spin"></i>
+                    <% end %>
+                    <%= build.status %></td>
+                </td>
+                <td><%= build.release %></td>
+                <td><%= build.builder %></td>
+                <td><%= build.commit %></td>
+                <td><%= build.started_at %></td>
+                <td><%= build.finished_at %></td>
+                <td>
+                    <%= link_to 'View', { :action => 'view', :id => build[:id] }, :method => :get %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>
+
+<h2>Builds history</h2>
 
 <div class="tab-content">
     <table id="root" class="list entries">

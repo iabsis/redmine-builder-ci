@@ -34,7 +34,7 @@
                 <td><%= build.started_at %></td>
                 <td><%= build.finished_at %></td>
                 <td>
-                    <%= link_to 'View', { :action => 'update', :id => build[:id] }, :method => :get %>
+                    <%= link_to 'View', { controller: 'builds', :action => 'view', :id => build[:id], project_id: build[:project_id] }, :method => :get %>
                 </td>
             </tr>
         <% end %>

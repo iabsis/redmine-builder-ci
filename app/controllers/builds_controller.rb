@@ -64,7 +64,8 @@ class BuildsController < ApplicationController
   end
 
   def all
-    @builds = Builds.find_each(batch_size: 5000)
+    @last_build = Builds.where(status: "Running").or(Builds.where(status: "Duplicate")).last(3).reverse
+    @builds = Builds.where(status: "Success").or(Builds.where(status: "Failed")).reorder("id DESC").limit(200)
   end
 
   private  

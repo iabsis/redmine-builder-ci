@@ -5,6 +5,7 @@
         <thead>
             <tr>
                 <th>Status</th>
+                <th>Project</th>
                 <th>Release</th>
                 <th>Builder</th>
                 <th>Commit</th>
@@ -25,6 +26,7 @@
                     <% end %>
                     <%= build.status %></td>
                 </td>
+                <td><%= build.project %></td>
                 <td><%= build.release %></td>
                 <td><%= build.builder %></td>
                 <td><%= build.commit %></td>

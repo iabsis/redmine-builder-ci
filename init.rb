@@ -8,6 +8,6 @@ Redmine::Plugin.register :continous_integration do
   menu :project_menu, :builds, { :controller => 'builds', :action => 'index' }, :caption => 'Builds', :after => :repository, :param => :project_id
   project_module :builds do
     permission :view_builds, :builds => [:view, :index]
-    permission :new_builds, :builds => :new
+    permission :new_builds, :builds => [:new, :update]
   end
 end

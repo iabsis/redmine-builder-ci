@@ -1,9 +1,7 @@
 class BuildsController < ApplicationController
   unloadable
 
-  before_action :find_project, :authorize, :only => [:view, :index]
-  before_action :find_project, :authorize, :only => :new
-
+  before_action :find_project, :authorize
   accept_api_auth :new, :update
 
   def index

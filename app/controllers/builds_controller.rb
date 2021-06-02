@@ -1,7 +1,8 @@
 class BuildsController < ApplicationController
   unloadable
 
-  before_action :find_project, :authorize
+
+  before_action :find_project, :authorize, except: [:update, :all]
   accept_api_auth :new, :update
 
   def index
@@ -42,6 +43,10 @@ class BuildsController < ApplicationController
   def update
 
     @build = Builds.find(params[:id])
+    @project = Project.find(@build[:project_id])
+
+    authorize
+
     @build.update(
       :status     => params[:status],
       :release     => params[:release],

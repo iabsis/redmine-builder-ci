@@ -4,6 +4,7 @@ class BuildsController < ApplicationController
 
   before_action :find_project, :authorize, except: [:update, :all]
   accept_api_auth :new, :update
+  before_action :require_admin, only: :all
 
   def index
     @project = Project.find(params[:project_id])

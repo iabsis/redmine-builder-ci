@@ -24,7 +24,7 @@ Restart Redmine
 
 ~~~
 cd <to your redmine folder>
-bundle exec rake redmine:plugins:migrate NAME=redmine-builder-ci VERSION=0 RAILS_ENV=production
+bundle exec rake redmine:plugins:migrate NAME=continous_integration VERSION=0 RAILS_ENV=production
 rm -rf plugins/redmine-builder-ci
 ~~~
 
